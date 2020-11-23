@@ -1,0 +1,14 @@
+memory.B.cells
+naive.B.cells
+memory.CD4.T.cells
+naive.CD4.T.cells
+regulatory.T.cells
+memory.CD8.T.cells
+naive.CD8.T.cells
+NK.cells
+neutrophils
+monocytes
+myeloid.dendritic.cells
+macrophages
+fibroblasts
+endothelial.cells

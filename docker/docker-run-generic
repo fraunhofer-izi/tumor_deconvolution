@@ -1,0 +1,36 @@
+#! /bin/bash --
+
+# In order to prevent code injection we call `/bin/bash --` and
+# strictly sanatize all input variables.
+
+[[ -z "$SUDO_USER" ]] && user="$USER" || user="$SUDO_USER"
+if (($#==0)) || (($#>2)) || [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]
+then
+    printf 'Usage: %s <container name> [<in/out name>]\n\n' "$0"
+    printf 'The script runs a docker container with the mounts\n'
+    printf '/<censored_path>/%s/docker/in_<in/out name>:/input:ro and\n' "$user"
+    printf '/<censored_path>/%s/docker/out_<in/out name>:/output:rw\n' "$user"
+    printf 'No other arguments are accepted.\n'
+    (($#>0)) && ( [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]] ) && exit 0
+    >&2 printf 'Error: unrecognized parameters.\n'
+    exit 1
+fi
+
+name="${1//[^a-zA-Z0-9-_\/:\.]}"
+postfix="${2//[^a-zA-Z0-9-_:]}"
+printf -v inDir '/<censored_path>/%s/docker/in_%s' \
+    "$user" "$postfix"
+printf -v outDir '/<censored_path>/%s/docker/out_%s' \
+    "$user" "$postfix"
+mkdir -p "$inDir" "$outDir"
+chown "$user" "$inDir" "$outDir" "$(dirname "$inDir")" \
+        "/<censored_path>/$user"
+
+printf -v cmd 'docker run -t -v %s:/input:ro -v %s:/output:rw' "$inDir" "$outDir"
+[ ! -z "$SLURM_CPUS_ON_NODE" ] && printf -v cmd '%s --cpus=%s' "$cmd" "$SLURM_CPUS_ON_NODE"
+[ ! -z "$SLURM_MEM_PER_NODE" ] && [ "$SLURM_MEM_PER_NODE" != 0 ] && \
+    printf -v cmd '%s --memory=%s' "$cmd" "$SLURM_MEM_PER_NODE"
+printf -v cmd '%s %s' "$cmd" "$name"
+
+printf 'Running: %s\n' "$cmd"
+eval "$cmd"

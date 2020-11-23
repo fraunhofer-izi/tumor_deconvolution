@@ -1,0 +1,5 @@
+numpy==1.16.4
+scipy==1.2.1
+pandas==0.25.0
+Theano==1.0.4
+pymc3==3.7

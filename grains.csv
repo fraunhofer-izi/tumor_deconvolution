@@ -1,0 +1,48 @@
+original,coarse,fine
+Activated B cells,B cells,too unspecific
+Activated T cells,too unspecific,too unspecific
+Basophils,others,others
+B cells,B cells,too unspecific
+CD4 T cells,CD4 T cells,too unspecific
+CD8 T cells,CD8 T cells,too unspecific
+Central Memory,too unspecific,too unspecific
+Central Memory CD4 T cells,CD4 T cells,memory CD4 T cells
+Central Memory CD8 T cells,CD8 T cells,memory CD8 T cells
+Central Memory T cells,too unspecific,too unspecific
+Dendritic cells,monocytic lineage,myeloid dendritic cells
+Effector CD4 T cells,CD4 T cells,too unspecific
+Effector Memory,too unspecific,too unspecific
+Effector Memory CD8 T cells,CD8 T cells,regulatory T cells
+Effector Memory T cells,too unspecific,too unspecific
+endothelial,endothelial cells,endothelial cells
+Eosinophils,others,others
+fibroblast,fibroblasts,fibroblasts
+Follicular helper T cells,CD4 T cells,too unspecific
+gamma delta T cells,others,others
+GC B cells,B cells,too unspecific
+Granulocytes,neutrophils,neutrophils
+Macrophage,monocytic lineage,macrophages
+Memory B cells,B cells,memory B cells
+Memory CD4 T cells,CD4 T cells,memory CD4 T cells
+Memory CD8 T cells,CD8 T cells,memory CD8 T cells
+Memory T cells,too unspecific,too unspecific
+Monocytes,monocytic lineage,monocytes
+Myeloid Dendritic cells,monocytic lineage,myeloid dendritic cells
+Naive B cells,B cells,naive B cells
+Naive CD4 T cells,CD4 T cells,naive CD4 T cells
+Naive CD8 T cells,CD8 T cells,naive CD8 T cells
+Naive T cells,too unspecific,too unspecific
+Naive T effector cells,too unspecific,too unspecific
+Neutrophils,neutrophils,neutrophils
+NK cells,NK cells,NK cells
+NKT cells,others,others
+PBMC,too unspecific,too unspecific
+Plasma cells,B cells,others
+Plasmablast,B cells,others
+Plasmacytoid Dendritic Cells,others,others
+T cells,too unspecific,too unspecific
+Th1 cells,CD4 T cells,others
+Th2 cells,CD4 T cells,others
+Th17 cells,CD4 T cells,others
+Tregs,CD4 T cells,regulatory T cells
+White blood cells,others,too unspecific

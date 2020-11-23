@@ -1,0 +1,17 @@
+#! /bin/bash --
+
+# In order to prevent code injection we call `/bin/bash --` and
+# strictly sanatize all input variables.
+
+if (($#==0)) || (($#>1)) || [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]
+then
+    printf 'Usage: %s <container id>\n\n' "$0"
+    printf 'The script kills a docker container.\n'
+    (($#>0)) && ( [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]] ) && exit 0
+    >&2 printf 'Error: unrecognized parameters.\n'
+    exit 1
+fi
+
+id="${1//[^a-zA-Z0-9]}"
+printf 'Running: docker kill %s\n' "$id"
+docker kill "$id"

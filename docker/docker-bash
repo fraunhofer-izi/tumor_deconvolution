@@ -1,0 +1,19 @@
+#! /bin/bash --
+
+# In order to prevent code injection we call `/bin/bash --` and
+# strictly sanatize all input variables.
+
+if (($#==0)) || (($#>1)) || [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]
+then
+    printf 'Usage: %s <container name>\n\n' "$0"
+    printf 'The script runns an interactve bash shell in the container.\n'
+    (($#>0)) && ( [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]] ) && exit 0
+    >&2 printf 'Error: unrecognized parameters.\n'
+    exit 1
+fi
+
+name="${1//[^a-zA-Z0-9-_\/:\.]}"
+printf -v cmd 'docker run --entrypoint "/bin/bash" -i -t %s' "$name"
+printf 'Running: %s\n' "$cmd"
+eval "$cmd"
+

@@ -1,0 +1,26 @@
+#! /bin/bash --
+
+# In order to prevent code injection we call `/bin/bash --` and
+# strictly sanatize all input variables.
+
+if (($#==0)) || (($#>2)) || [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]
+then
+    printf 'Usage: %s <container name> [<dockerfile>]\n\n' "$0"
+    printf 'The script produces a docker container in the current\n'
+    printf 'working directory. If the optional <dockerfile> is\n'
+    printf 'not given `./Dockerfile` is used per default.\n'
+    printf 'No other arguments are accepted.\n'
+    (($#>0)) && ( [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]] ) && exit 0
+    >&2 printf 'Error: unrecognized parameters.\n'
+    exit 1
+fi
+
+name="${1//[^a-zA-Z0-9-_\/:\.]}"
+if (($#==1)); then
+    printf 'Running: docker build -t %s .\n' "$name"
+    docker build -t "$name" .
+else
+    dockerfile="${2//[^a-zA-Z0-9-_\/:\.]}"
+    printf 'Running: docker build -f %s -t %s .\n' "$dockerfile" "$name"
+    docker build -f "$dockerfile" -t "$name" .
+fi

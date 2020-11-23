@@ -1,0 +1,45 @@
+# The cell chrachterisations where fetched from the data directory:
+
+
+### coarse grain ### Sub_Challenge_1
+version="wwsp1s2e4h1l1rsnpot"
+grain="coarse"
+
+# We move the required data in place
+cp ../../data/genchar_${grain}_tagged_wws.pkl ./data/chars.pkl
+cp data/${grain}_grains data/grains
+cp ../python/deconvolute.py ./data/deconvolute.py
+
+#docker build -f Dockerfile_${grain} -t docker.synapse.org/syn20547739/izi_${grain}:$version .
+sudo -H ./docker-build \
+    docker.synapse.org/syn20547739/izi_${grain}:$version Dockerfile
+
+# this assoicates the container with the synapse project: https://www.synapse.org/#!Synapse:syn20547739/
+
+# To push the container run
+sudo docker login docker.synapse.org
+sudo docker push docker.synapse.org/syn20547739/izi_${grain}:$version
+
+
+### fine grain ### Sub_Challenge_2
+version="wwsrp1s2e4h1l1rsnpot"
+grain="fine"
+
+# We move the required data in place
+cp ../../data/genchar_${grain}_tagged_wwsr.pkl ./data/chars.pkl
+cp data/${grain}_grains data/grains
+cp ../python/deconvolute.py ./data/deconvolute.py
+cp ../python/stickbreaking.py ./data/stickbreaking.py
+
+#docker build -f Dockerfile_${grain} -t docker.synapse.org/syn20547739/izi_${grain}:$version .
+sudo -H ./docker-build \
+    docker.synapse.org/syn20547739/izi_${grain}:$version Dockerfile
+
+# this assoicates the container with the synapse project: https://www.synapse.org/#!Synapse:syn20547739/
+
+# To push the container run
+sudo docker login docker.synapse.org
+sudo docker push docker.synapse.org/syn20547739/izi_${grain}:$version
+
+# You can execute the Readme with `sh Readme` to do all the steps.
+

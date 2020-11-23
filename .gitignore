@@ -1,0 +1,9 @@
+*.err
+*.log
+*.slurmlog
+*.out
+*.tmp.R
+.nfs*
+.ipynb_checkpoints/
+packrat/lib*/
+__pycache__
